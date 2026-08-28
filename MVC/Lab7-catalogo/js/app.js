@@ -13,10 +13,22 @@ renderCatalog(getBooks(), catalogEl);
 
 //Clic en una tarjeta (delegación en #catalog).
 catalogEl.addEventListener('click', (event) => {
-  //TODO
+  const card = event.target.closest('.book-card');
+
+  if (!card) {
+    return;
+  }
+
+  const id = card.dataset.id;
+
+  const book = getBookById(id);
+
+  if (book) {
+    showBookDetail(book, detailEl);
+  }
 });
 
 //Botón Cerrar: oculta el detalle.
 closeBtn.addEventListener('click', () => {
-  //TODO
+  hideBookDetail(detailEl);
 });

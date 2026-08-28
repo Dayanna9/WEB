@@ -25,11 +25,10 @@ const books = [
 
 //Devuelve el arreglo de libros.
 export function getBooks() {
-    return books;
-  
+  return books;
 }
 
 //Devuelve el libro con ese id, o undefined.
 export function getBookById(id) {
-    return books.find(book => book.id === Number(id));
+  return getBooks().find(book => book.id === Number(id));
 }
