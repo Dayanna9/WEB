@@ -17,7 +17,7 @@ function addToWishlist(id, title) {
 
 //Quita el elemento con ese id.
 function removeFromWishlist(id) {
-  //TODO: quitar el elemento con ese id
+  items.filter(item => item.id !==id)
 }
 
 //Devuelve los elementos actuales (id, title).
