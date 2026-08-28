@@ -1,13 +1,17 @@
 //js/wishlist.js
 
 //Arreglo de deseos. Unique por id. No usa document.
-let items = [];
+let items = [
+];
 
 //Agrega { id, title } si ese id no está. No duplica.
 function addToWishlist(id, title) {
-  if (id, title){
-    items.push(id, title)
-    return items;
+
+  if (items.find(item => item.id === id)){
+    return false;
+  } else {
+    items.push({id: id, title: title})
+    return true;
   }
 }
 
