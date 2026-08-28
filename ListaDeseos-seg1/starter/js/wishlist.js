@@ -5,7 +5,10 @@ let items = [];
 
 //Agrega { id, title } si ese id no está. No duplica.
 function addToWishlist(id, title) {
-  //TODO: si el id no está, agregar { id, title }
+  if (id, title){
+    items.push(id, title)
+    return items;
+  }
 }
 
 //Quita el elemento con ese id.
@@ -15,10 +18,10 @@ function removeFromWishlist(id) {
 
 //Devuelve los elementos actuales (id, title).
 function getWishlist() {
-  //TODO: devolver el arreglo de deseos
+  return items;
 }
 
 //Devuelve cuántos elementos hay.
-function getWishlistCount() {
-  //TODO: devolver la cantidad de elementos
+function getWishlistCount(items) {
+  return items.length;
 }
