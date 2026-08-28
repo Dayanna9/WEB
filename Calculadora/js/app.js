@@ -1,6 +1,8 @@
 const displayElement = document.getElementById('display');
 const keypadElement = document.querySelector('.keypad');
 
+
+
 function updateDisplay() {
   displayElement.textContent = getDisplayValue();
 }
