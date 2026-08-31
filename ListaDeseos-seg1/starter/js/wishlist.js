@@ -17,7 +17,7 @@ function addToWishlist(id, title) {
 
 //Quita el elemento con ese id.
 function removeFromWishlist(id) {
-  items.filter(item => item.id !==id)
+  items = items.filter(item => item.id !==id)
 }
 
 //Devuelve los elementos actuales (id, title).
@@ -26,6 +26,6 @@ function getWishlist() {
 }
 
 //Devuelve cuántos elementos hay.
-function getWishlistCount(items) {
+function getWishlistCount() {
   return items.length;
 }
