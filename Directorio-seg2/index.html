@@ -13,3 +13,39 @@ NOTAS:
 - Las tarjetas se buscan con closest('.author-card') y data-id
 - Enlazar js/app.js con <script type="module" src="js/app.js">
 -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPB Bookstore - Directorio de autores</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>UPB Bookstore</h1>
+    <p class="tagline">Directorio de autores</p>
+  </header>
+
+  <main>
+    <p id="status" class="status" aria-live="polite"></p>
+    <section id="authors" class="authors" aria-label="Directorio de autores"></section>
+
+    <section id="author-detail" class="author-detail hidden" aria-label="Detalle del autor">
+      <img id="detail-photo" class="author-photo" src="" alt="">
+      <h2 id="detail-name"></h2>
+      <p id="detail-bio"></p>
+      <p id="detail-topics" class="author-topics"></p>
+      <div id="detail-books" class="detail-books"></div>
+      <button id="close-detail" type="button">Cerrar</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>UPB Bookstore</p>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
