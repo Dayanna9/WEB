@@ -17,84 +17,110 @@ const removeBtn = document.getElementById('remove-event');
 
 let currentView = 'calendar';
 
-//Vuelve a dibujar la vista activa. No solicita JSON. No agrega ni quita eventos.
-//1. Si currentView es 'agenda', renderAgenda(getEvents(), agendaEl).
-//2. Si no, renderCalendar(getEvents(), calendarEl).
+//Vuelve a dibujar la vista activa.
 function refreshView() {
-  //TODO: agenda -> renderAgenda. Si no, renderCalendar
+  if (currentView === 'agenda') {
+    renderAgenda(getEvents(), agendaEl);
+  } else {
+    renderCalendar(getEvents(), calendarEl);
+  }
 }
 
 //Muestra el calendario y oculta agenda y detalle.
-//1. currentView = 'calendar'.
-//2. hideEventDetail.
-//3. Ocultar #agenda, mostrar #calendar, is-active en Calendario.
-//4. refreshView.
 function showCalendarView() {
-  //TODO: currentView, hideEventDetail, mostrar mes, refreshView
+  currentView = 'calendar';
+  hideEventDetail(detailEl);
+  calendarEl.classList.remove('hidden');
+  agendaEl.classList.add('hidden');
+  btnCalendar.classList.add('is-active');
+  btnAgenda.classList.remove('is-active');
+  refreshView();
 }
 
 //Muestra la agenda y oculta calendario y detalle.
-//1. currentView = 'agenda'.
-//2. hideEventDetail.
-//3. Ocultar #calendar, mostrar #agenda, is-active en Agenda.
-//4. refreshView.
 function showAgendaView() {
-  //TODO: currentView, hideEventDetail, mostrar lista, refreshView
+  currentView = 'agenda';
+  hideEventDetail(detailEl);
+  calendarEl.classList.add('hidden');
+  agendaEl.classList.remove('hidden');
+  btnCalendar.classList.remove('is-active');
+  btnAgenda.classList.add('is-active');
+  refreshView();
 }
 
-//Clic en Calendario: mostrar la vista del mes.
-//1. showCalendarView.
 btnCalendar.addEventListener('click', () => {
-  //TODO: showCalendarView
+  showCalendarView();
 });
 
-//Clic en Agenda: mostrar la lista ordenada por fecha.
-//1. showAgendaView.
 btnAgenda.addEventListener('click', () => {
-  //TODO: showAgendaView
+  showAgendaView();
 });
 
-//Clic en chip: abrir el detalle de ese evento.
-//1. closest .event-chip. Si no hay chip, return.
-//2. getEventById(chip.dataset.id) y showEventDetail.
 calendarEl.addEventListener('click', (event) => {
-  //TODO: closest .event-chip, getEventById, showEventDetail
+  const chip = event.target.closest('.event-chip');
+
+  if (!chip) {
+    return;
+  }
+
+  const selectedEvent = getEventById(chip.dataset.id);
+
+  if (selectedEvent) {
+    showEventDetail(selectedEvent, detailEl);
+  }
 });
 
-//Clic en fila: abrir el detalle de ese evento.
-//1. closest .agenda-item. Si no hay fila, return.
-//2. getEventById(item.dataset.id) y showEventDetail.
 agendaEl.addEventListener('click', (event) => {
-  //TODO: closest .agenda-item, getEventById, showEventDetail
+  const item = event.target.closest('.agenda-item');
+
+  if (!item) {
+    return;
+  }
+
+  const selectedEvent = getEventById(item.dataset.id);
+
+  if (selectedEvent) {
+    showEventDetail(selectedEvent, detailEl);
+  }
 });
 
-//Clic en Agregar evento: mutar el modelo y redibujar la vista activa.
-//1. Leer date, title (trim) y type. Si falta título o fecha, return.
-//2. addEvent con { date, title, type }.
-//3. Limpiar #event-title y refreshView.
 addBtn.addEventListener('click', () => {
-  //TODO: addEvent, limpiar título, refreshView
+  const date = dateInput.value;
+  const title = titleInput.value.trim();
+  const type = typeInput.value;
+
+  if (!date || !title) {
+    return;
+  }
+
+  addEvent({ date, title, type });
+  titleInput.value = '';
+  refreshView();
 });
 
-//Clic en Quitar evento: mutar el modelo, ocultar detalle y redibujar.
-//1. Leer data-id del panel. Si no hay id, return.
-//2. removeEvent, hideEventDetail, refreshView.
 removeBtn.addEventListener('click', () => {
-  //TODO: removeEvent, hideEventDetail, refreshView
+  const id = detailEl.dataset.id;
+
+  if (!id) {
+    return;
+  }
+
+  removeEvent(id);
+  hideEventDetail(detailEl);
+  refreshView();
 });
 
-//Clic en Cerrar: ocultar el detalle. No cambia events ni la vista activa.
-//1. hideEventDetail(detailEl).
 closeBtn.addEventListener('click', () => {
   hideEventDetail(detailEl);
 });
 
-//Carga JSON y dibuja el calendario. Si falla, texto en #status.
-//1. await loadEvents.
-//2. showCalendarView.
-//3. Si lanza, mensaje breve en #status. La grilla queda sin chips.
 async function start() {
-  //TODO: await loadEvents, showCalendarView. Si lanza, mensaje en #status
+  try {
+    await loadEvents();
+    showCalendarView();
+  } catch (error) {
+    statusEl.textContent = 'No se pudieron cargar los eventos.';
+  }
 }
 
 start();
