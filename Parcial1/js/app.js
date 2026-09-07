@@ -17,7 +17,6 @@ const removeBtn = document.getElementById('remove-event');
 
 let currentView = 'calendar';
 
-//Vuelve a dibujar la vista activa.
 function refreshView() {
   if (currentView === 'agenda') {
     renderAgenda(getEvents(), agendaEl);
@@ -26,7 +25,6 @@ function refreshView() {
   }
 }
 
-//Muestra el calendario y oculta agenda y detalle.
 function showCalendarView() {
   currentView = 'calendar';
   hideEventDetail(detailEl);
@@ -37,7 +35,6 @@ function showCalendarView() {
   refreshView();
 }
 
-//Muestra la agenda y oculta calendario y detalle.
 function showAgendaView() {
   currentView = 'agenda';
   hideEventDetail(detailEl);

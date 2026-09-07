@@ -1,0 +1,26 @@
+1. ¿Por qué basta un getEvents() sobre el arreglo en memoria y no hace falta un segundo arreglo en view.js?
+
+model.js mantiene una única fuente de datos con todos los eventos,
+tanto Calendario como Agenda reciben el mismo arreglo mediante getEvents(),
+y cada vista solamente lo representa de una manera diferente,
+al agregar o quitar un evento se modifica ese mismo arreglo
+y refreshView() vuelve a dibujar la vista activa,
+por lo que no es necesario duplicar los datos en view.js.
+
+2. Contrastar patrón arquitectónico y estilo arquitectónico. ¿En cuál de los dos sitúa MVC este curso?
+
+Un patrón arquitectónico proporciona una estructura reutilizable para
+organizar una aplicación, mientras que
+un estilo arquitectónico es una forma general de organizar
+y relacionar los componentes de un sistema,
+en el curso MVC se situa como un patrón arquitectónico.
+
+3. ¿Qué aporta un framework frontend que esos tres archivos no resuelven por sí solos?
+
+Un framework frontend aporta herramientas y una estructura para construir
+aplicaciones más grandes, como componentes reutilizables,
+manejo organizado del estado, enrutamiento,
+actualización de la interfaz y otras utilidades.
+los archvios separan modelo, vista
+y lógica de app, pero no proporcionan por sí mismos
+toda esa infraestructura de un proyecto completo.

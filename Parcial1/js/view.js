@@ -4,7 +4,6 @@ function dayFromDate(date) {
   return String(Number(date.slice(-2)));
 }
 
-//Coloca un .event-chip en la celda [data-day] de event.date.
 export function renderCalendar(events, calendarEl) {
   calendarEl.querySelectorAll('.event-chip').forEach(chip => chip.remove());
 
@@ -26,7 +25,6 @@ export function renderCalendar(events, calendarEl) {
   }
 }
 
-//Dibuja #agenda: lista ordenada por date.
 export function renderAgenda(events, agendaEl) {
   agendaEl.innerHTML = '';
 
@@ -51,7 +49,6 @@ export function renderAgenda(events, agendaEl) {
   }
 }
 
-//Rellena el panel de detalle y lo muestra.
 export function showEventDetail(event, detailEl) {
   detailEl.querySelector('#detail-title').textContent = event.title;
   detailEl.querySelector('#detail-date').textContent = event.date;
@@ -60,7 +57,6 @@ export function showEventDetail(event, detailEl) {
   detailEl.classList.remove('hidden');
 }
 
-//Oculta el panel de detalle.
 export function hideEventDetail(detailEl) {
   detailEl.classList.add('hidden');
 }

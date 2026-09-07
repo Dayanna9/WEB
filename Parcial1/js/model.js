@@ -2,7 +2,6 @@
 let events = [];
 let loaded = false;
 
-//Solicita api/events.json una vez y guarda data.events en memoria.
 export async function loadEvents() {
   if (loaded) {
     return events;
@@ -26,18 +25,15 @@ export async function loadEvents() {
   return events;
 }
 
-//Devuelve el arreglo en memoria. No usa document.
 export function getEvents() {
   return events;
 }
 
-//Busca un evento por id en el arreglo en memoria.
 export function getEventById(id) {
   const numericId = Number(id);
   return events.find(event => event.id === numericId);
 }
 
-//Agrega { id, date, title, type } al arreglo. No dibuja ni usa fetch.
 export function addEvent(payload) {
   const title = payload.title.trim();
 
@@ -61,7 +57,6 @@ export function addEvent(payload) {
   });
 }
 
-//Quita el evento con ese id.
 export function removeEvent(id) {
   const numericId = Number(id);
   events = events.filter(event => event.id !== numericId);
