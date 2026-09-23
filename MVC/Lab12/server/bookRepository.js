@@ -48,9 +48,10 @@ async function findById(id) {
  * Entrada: `{ title, author, price }`. Salida: libro creado con `id` asignado por MySQL.
  */
 async function create({ title, author, price }) {
-  //TODO: INSERT INTO books (title, author, price) VALUES (?, ?, ?)
-  //TODO: devolver findById(insertId)
-  throw new Error('create no implementado');
+  const [result] = await pool.query(
+    'INSERT INTO books (title, author, price) VALUES (?, ?, ?)',
+    [title, author, price]);
+    return this.findById(result.insertId);
 }
 
 /**
@@ -58,9 +59,32 @@ async function create({ title, author, price }) {
  * Entrada: `id` y objeto parcial (`title`, `author` y/o `price`). Salida: libro actualizado o `null` si no hay fila.
  */
 async function update(id, partial) {
-  //TODO: UPDATE parcial solo con campos presentes en partial
-  //TODO: devolver null si no hay fila con ese id
-  throw new Error('update no implementado');
+  const fields = [];
+  const values = [];
+  if (Object.hasOwn(partial, 'title')) {
+    fields.push('title = ?');
+    values.push(partial.title);
+  }
+  if (Object.hasOwn(partial, 'author')) {
+    fields.push('author = ?');
+    values.push(partial.author);
+  }
+  if (Object.hasOwn(partial, 'price')) {
+    fields.push('price = ?');
+    values.push(partial.price);
+  }
+
+  if (fields.length === 0) {
+    throw new Error('No hay campos para actualizar');
+  }
+  values.push(id);
+  const [result] = await pool.query(
+    `UPDATE books SET ${fields.join(', ')} WHERE id = ?`, values);
+  
+  if (result.affectedRows === 0) {
+  return null;}
+
+return this.findById(id);
 }
 
 /**

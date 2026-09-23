@@ -26,9 +26,32 @@ router.get('/', async (req, res) => {
  * Hasta implementar: responde 501. Contrato final: 201, 400 (body inválido), 500 (error DB).
  */
 router.post('/', async (req, res) => {
-  //TODO: validar title, author, price; llamar repo.create; responder 201
-  res.status(501).json({ error: 'POST /books no implementado' });
+  const { title, author, price } = req.body;
+  if (typeof title !== 'string' ||
+    title.trim() === '' ||
+    typeof author !== 'string' ||
+    author.trim() === ''
+  ) {
+    return res.status(400).json({ error: 'Title y author deben ser valores no vacíos' });
+  }
+
+  if (typeof price !== 'number' || price < 0) {
+    return res.status(400).json({
+      error: 'price debe ser un número mayor a cero'
+    });
+  }
+  try{
+  const book = await bookRepository.create({
+    title: title.trim(),
+    author: author.trim(),
+    price });
+  res.status(201).json(book);
+} catch (error){
+  console.error('Error al crear libro:', error);
+  res.status(500).json({ error: 'Error del server' });
+}
 });
+
 
 /**
  * Parte 3. PATCH /books/:id - actualización parcial desde `req.body`.
