@@ -1,10 +1,9 @@
-// server/routes/books.js
-// RUTAS HTTP: únicamente asocia método/ruta con el controlador.
+// RUTAS: solo asocian método + URL con la función del controlador.
 const express = require('express');
-const controller = require('../bookRepository');
+const controller = require('../controllers/booksController');
 const router = express.Router();
 
-router.get('/', controller.getAll);
+router.get('/', controller.list);
 router.post('/', controller.create);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.remove);
