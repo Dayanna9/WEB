@@ -1,4 +1,3 @@
-// Conexión a MySQL. Las credenciales se leen del archivo .env local.
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({

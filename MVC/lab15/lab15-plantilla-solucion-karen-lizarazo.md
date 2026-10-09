@@ -21,7 +21,7 @@ Cada ruta del mapa debe existir en el `.zip`.
 | Rol         | Cliente | Servidor |
 |-------------|---------|----------|
 | Modelo      | `public/js/model.js` | `server/models/bookModel.js` |
-| Vista       | `public/js/view.js` | `public/js/view.js` (el servidor no genera tarjetas) |
+| Vista       | `public/js/view.js` | `public/js/view.js` |
 | Controlador | `public/js/app.js` | `server/controllers/booksController.js` |
 
 ## Solución
@@ -381,15 +381,15 @@ Responder en prosa breve. Una respuesta por pregunta.
 
 **Pregunta de síntesis:** ¿Por qué deja de hacer falta CORS para leer `GET /books` cuando el documento HTML y la API comparten el puerto 3000?
 
-Porque el documento HTML y la petición a `/books` usan el mismo origen: el mismo esquema, host y puerto (`http://localhost:3000`). CORS se aplica a peticiones entre orígenes distintos, así que el navegador no necesita autorización CORS para esta petición del mismo origen.
+Porque el documento HTML y la petición a books usan el mismo origen: el mismo esquema, host y puerto 3000.
 
 ### Parte 3
 
 **Pregunta de síntesis:** ¿Qué archivo del servidor debe conocer el texto exacto de la consulta `SELECT`?
 
-`server/models/bookModel.js`, porque el modelo concentra las consultas SQL para leer, crear, actualizar y eliminar libros. El controlador no debe contener SQL.
+server/models/bookModel.js , porque el modelo concentra las consultas SQL para leer, crear, actualizar y eliminar libros.
 
 **Pregunta de síntesis:** ¿Por qué `js/view.js` sigue siendo la vista del catálogo aunque Express entregue `index.html`?
 
-Porque `index.html` define la estructura inicial del documento, mientras que `public/js/view.js` dibuja las tarjetas de los libros y actualiza el panel de detalle manipulando el DOM. Express solo entrega los archivos estáticos; no construye las tarjetas en el servidor.
+Porque el index define la estructura inicial del documento, mientras que view dibuja las tarjetas de los libros y actualiza el panel de detalle manipulando el DOM y express solo entrega los archivos estáticos.
 

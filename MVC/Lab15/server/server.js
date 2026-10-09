@@ -1,4 +1,3 @@
-// Punto de entrada: entrega la vista del cliente y monta las rutas HTTP.
 require('dotenv').config();
 const express = require('express');
 const path = require('path');

@@ -1,4 +1,3 @@
-// CONTROLADOR: valida entradas, coordina el modelo y define status/JSON.
 const bookModel = require('../models/bookModel');
 
 function validId(rawId) {

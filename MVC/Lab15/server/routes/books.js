@@ -1,4 +1,3 @@
-// RUTAS: solo asocian método + URL con la función del controlador.
 const express = require('express');
 const controller = require('../controllers/booksController');
 const router = express.Router();

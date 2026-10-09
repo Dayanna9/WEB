@@ -1,4 +1,3 @@
-// MODELO: contiene exclusivamente el acceso SQL a la tabla books.
 const { pool } = require('../db');
 
 function mapBook(row) {
